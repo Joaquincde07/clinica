@@ -1,0 +1,101 @@
+@startuml
+
+
+class clinica {
+    +Agregar()
+    +Modificar()
+    +Eliminar()
+    +ListaDeConsulta()
+}
+
+class Paciente {
+    -id: str
+    -nombre: str
+    -edad: int
+    -genero: str
+    -email: str
+    -telefono: str
+    -direccion: str
+    +ListaDeConsulta()
+}
+
+clinica <|-- Paciente
+
+class Quimico {
+    -id: str
+    -nombre: str
+    -direccion: str
+    -email: str
+    -telefono: str
+    +EntregaMedicamentos()
+}
+
+clinica <|-- Quimico
+
+class Laboratorio {
+    -id: str
+    -nombre: str
+    -direccion: str
+    -email: str
+    -telefono: str
+    +RecolectarPrueba()
+    +GenerarInformeLaboral()
+}
+
+clinica <|-- Laboratorio
+
+
+class Descripcion {
+    -idPrescripcion: int
+    -diagnostico: str
+    -nombreMedicina: str
+    -potenciaMedicamento: int
+    -frecuenciaMedicamento: int
+    -observaciones: str
+    -pruebaLaboratorio: str
+    -laboratorioInstrucciones: str
+    -preincripcionesEntregar: str
+    -solicitudesLaboratorioRealizadas: str
+    -montoFactura: float
+    +GenerarFactura()
+}
+
+
+class Doctores {
+    -id: str
+    -nombre: str
+    -edad: int
+    -genero: str
+    -calificacion: str
+    -experiencia: str
+    -numeroRegistro: str
+    +AsignarDescripcion()
+    +MostrarInformacion()
+}
+
+clinica <|-- Doctores
+Descripcion <|-- Doctores
+
+
+class Consultas {
+    -paciente: Paciente
+    -doctor: Doctores
+    -en_linea_o_cita: str
+    -fecha_solicitud: date
+    -cadena_sintomas: str
+    -estado_solicitud: str
+    +MostrarConsulta()
+}
+
+class Especialista {
+    -especialidad: str
+    +MostrarEspecialidad()
+}
+
+Doctores <|-- Especialista
+
+
+Consultas o-- Paciente
+Consultas o-- Doctores
+
+@enduml
